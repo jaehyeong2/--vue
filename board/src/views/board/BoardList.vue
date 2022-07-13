@@ -16,7 +16,7 @@
 
       <tr v-for="(data, idx) in list" :key="idx">
         <td>{{ data.boardId }}</td>
-        <td><a v-on:click="fnView(`${data.idx}`)">{{ data.title }}</a></td>
+        <td><a v-on:click="fnView(`${data.boardId}`)">{{ data.title }}</a></td>
         <td>{{ data.userName }}</td>
         <td>{{ data.createDate }}</td>  
       </tr>
@@ -80,11 +80,11 @@ export default {
   },
   methods: {
     fnGetList() {
-      this.requestBody = { // 데이터 전송        
-        keyword: this.keyword,
-        page: this.page,
-        size: this.size
-      }
+      // this.requestBody = { // 데이터 전송        
+      //   keyword: this.keyword,
+      //   page: this.page,
+      //   size: this.size
+      // }
 
       this.$axios.get(this.$serverUrl + "/boards", {
         params: this.requestBody,
@@ -92,7 +92,6 @@ export default {
       }).then((res) => {      
 
         this.list = res.data.data.dataList;  //서버에서 데이터를 목록으로 보내므로 바로 할당하여 사용할 수 있다.
-        console.log(res.data);
         console.log(res.data.data.dataList);
 
       }).catch((err) => {
@@ -104,7 +103,7 @@ export default {
     fnView(idx) {
       this.requestBody.idx = idx
       this.$router.push({
-        path: './detail',
+        path: './boards/detail',
         query: this.requestBody
       })
     },

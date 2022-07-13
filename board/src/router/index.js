@@ -23,7 +23,7 @@ const routes = [
     component: BoardList
   },
   {
-    path: '/board/detail',
+    path: '/boards/detail',
     name: 'BoardDetail',
     component: BoardDetail
   },
