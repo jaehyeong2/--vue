@@ -6,18 +6,19 @@
     <table class="w3-table-all">
       <thead>
       <tr>
-        <th>No</th>
+        <th>번호</th>
         <th>제목</th>
         <th>작성자</th>
         <th>등록일시</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(data, id) in list" :key="id">
-        <td>{{ data.dataList[1] }}</td>
-        <td><a v-on:click="fnView(`${data.id}`)">{{ data.dataList[0].content }}</a></td>
-        <td>{{ data.dataList[id] }}</td>
-        <td>{{ data.totalCount }}</td>  
+
+      <tr v-for="(data, idx) in list" :key="idx">
+        <td>{{ data.boardId }}</td>
+        <td><a v-on:click="fnView(`${data.idx}`)">{{ data.title }}</a></td>
+        <td>{{ data.userName }}</td>
+        <td>{{ data.createDate }}</td>  
       </tr>
       </tbody>
     </table>
@@ -90,7 +91,9 @@ export default {
         headers: {}
       }).then((res) => {      
 
-        this.list = res.data  //서버에서 데이터를 목록으로 보내므로 바로 할당하여 사용할 수 있다.
+        this.list = res.data.data.dataList;  //서버에서 데이터를 목록으로 보내므로 바로 할당하여 사용할 수 있다.
+        console.log(res.data);
+        console.log(res.data.data.dataList);
 
       }).catch((err) => {
         if (err.message.indexOf('Network Error') > -1) {
