@@ -12,8 +12,8 @@
         <th>등록일시</th>
       </tr>
       </thead>
+      
       <tbody>
-
       <tr v-for="(data, idx) in list" :key="idx">
         <td>{{ data.boardId }}</td>
         <td><a v-on:click="fnView(`${data.boardId}`)">{{ data.title }}</a></td>
@@ -22,6 +22,7 @@
       </tr>
       </tbody>
     </table>
+
     <div class="pagination w3-bar w3-padding-16 w3-small" v-if="paging.total_list_cnt > 0">
       <span class="pg">
       <a href="javascript:;" @click="fnPage(1)" class="first w3-button w3-bar-item w3-border">&lt;&lt;</a>
@@ -109,7 +110,7 @@ export default {
     },
     fnWrite() {
       this.$router.push({
-        path: './write'
+        path: './boards/write'
       })
     },
     fnPage(n) {

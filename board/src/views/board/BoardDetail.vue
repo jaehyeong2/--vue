@@ -29,7 +29,8 @@ export default {
       title: '',
       author: '',
       contents: '',
-      created_at: ''
+      created_at: '',
+      boardId: ''
     }
   },
   mounted() {
@@ -37,7 +38,7 @@ export default {
   },
   methods: {
     fnGetView() {
-      this.$axios.get(this.$serverUrl + '/boards/' +this.requestBody.idx, {
+      this.$axios.get(this.$serverUrl + '/boards/' +this.idx, {
 
       }).then((res) => {
           console.log("겟뷰 호출")
@@ -47,6 +48,7 @@ export default {
         this.userName = list.userName;
         this.content = list.content;
         this.createDate = list.createDate;
+        this.boardId = list.boardId;
       }).catch((err) => {
         if (err.message.indexOf('Network Error') > -1) {
           alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
@@ -69,8 +71,10 @@ export default {
     fnDelete() {
       if (!confirm("삭제하시겠습니까?")) return
 
-      this.$axios.delete(this.$serverUrl + '/boards/' + this.idx, {})
-          .then(() => {
+      this.$axios.delete(this.$serverUrl + '/boards/' + this.boardId, {},)
+    .then((res) => {
+      console.log(this.requestbody.idx)
+            console.log(res);
             alert('삭제되었습니다.')
             this.fnList();
           }).catch((err) => {
