@@ -41,6 +41,19 @@
       <a href="javascript:;" @click="fnPage(`${totalCount}`)" class="last w3-button w3-bar-item w3-border">&gt;&gt;</a>
       </span>
     </div>
+
+<div>
+  <select v-model="searchKey">
+    <option value="">- 선택 -</option>
+    <option value="author">작성자</option>
+    <option value="title">제목</option>
+    <option value="contents">내용</option>
+  </select>
+  &nbsp;
+  <input type="text" v-model="seaerchValue" @keyup.enter="fnPage()">
+  &nbsp;
+  <button @click="fnPage()">검색</button>
+</div>
   </div>
 </template>
 
@@ -56,14 +69,15 @@ export default {
       totalCount : 0, //페이징 데이터
       page: 1,
       size: 10,
-      keyword: this.$route.query.keyword,
       paginavigation: function () { //페이징 처리 for문 커스텀
         let pageNumber = [] //;
         let startPage = this.startPage;
         let endPage = this.endPage;
         for (let i = startPage; i <= endPage; i++) pageNumber.push(i);
         return pageNumber;
-      }
+      },
+      searchKey: this.$route.query.sk ? this.$route.query.sk : '',
+      seaerchValue: this.$route.query.sv ? this.$route.query.sv : '',
     }
   },
    mounted() {
@@ -72,7 +86,8 @@ export default {
   methods: {
     fnGetList() {
       this.requestBody = { // 데이터 전송        
-        keyword: this.keyword,
+        sk: this.searchKey,
+        sv: this.seaerchValue,
         page: this.page,
         size: this.size
       }

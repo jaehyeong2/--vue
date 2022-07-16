@@ -4,7 +4,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/boards">글 목록</router-link> |
-      <router-link to="/signin">로그인</router-link>
+      <router-link to="/login">로그인</router-link>
     </div>
 
   </header>
