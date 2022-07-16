@@ -4,6 +4,7 @@ import BoardList from '@/views/board/BoardList.vue'
 import BoardDetail from '@/views/board/BoardDetail.vue'
 import BoardWrite from '@/views/board/BoardWrite.vue'
 import SignIn from '@/views/auth/SignIn.vue'
+import SignUp from '@/views/auth/SignUp.vue'
 
 const routes = [
   {
@@ -15,6 +16,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: SignIn 
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp 
   },
 
   {
