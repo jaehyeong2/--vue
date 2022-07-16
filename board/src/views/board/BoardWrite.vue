@@ -2,10 +2,10 @@
   <div class="board-detail">
     <div class="board-contents">
       <input type="text" v-model="title" class="w3-input w3-border" placeholder="제목을 입력해주세요.">
-      <input type="text" v-model="author" class="w3-input w3-border" placeholder="작성자를 입력해주세요." v-if="idx === undefined">
+      <!-- <input type="text" v-model="author" class="w3-input w3-border" placeholder="내용을 입력해주세요." v-if="idx === undefined"> -->
     </div>
     <div class="board-contents">
-      <textarea id="" cols="30" rows="10" v-model="contents" class="w3-input w3-border" style="resize: none;">
+      <textarea id="" cols="30" rows="10" v-model="contents" placeholder="내용을 입력해주세요." class="w3-input w3-border" style="resize: none;">
       </textarea>
     </div>
     <div class="common-buttons">
@@ -70,7 +70,11 @@ export default {
 
       if (this.idx === undefined) {
         //INSERT
-        this.$axios.post(apiUrl, this.form)
+        this.$axios.post(apiUrl, this.form,{
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3b2d1ZDE1MTQiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU3OTQ0MzgyLCJleHAiOjE2NTg0Njk5ODJ9.eOu6Inq6n-BtgiLmJnGg0jX6riyjQHcCf7XObDEH_Y4`
+        }})
         .then((res) => {
             console.log(res);
           alert('글이 저장되었습니다.')
