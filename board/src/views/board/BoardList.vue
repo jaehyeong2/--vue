@@ -1,7 +1,7 @@
 <template>
   <div class="board-list">
     <div class="common-buttons">
-      <button type="button" class="w3-button w3-round w3-blue-gray" v-on:click="fnWrite">등록</button>
+      <button type="button" class="w3-button w3-round w3-blue-gray" v-on:click="fnWrite()">등록</button>
     </div>
     <table class="w3-table-all">
       <thead>
@@ -81,10 +81,10 @@ export default {
     }
   },
    mounted() {
-    this.fnGetList()
+    this.getBoardList()
   },
   methods: {
-    fnGetList() {
+    getBoardList() {
       this.requestBody = { // 데이터 전송        
         sk: this.searchKey,
         sv: this.seaerchValue,
@@ -120,13 +120,13 @@ export default {
     },
     fnWrite() {
       this.$router.push({
-        path: './write'
+        path: './boards/write'
       })
     },
     fnPage(n) {
       if (this.page !== n) {
         this.page = n
-        this.fnGetList()
+        this.getBoardList()
       }
     }
   }

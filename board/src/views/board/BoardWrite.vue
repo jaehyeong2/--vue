@@ -78,7 +78,7 @@ export default {
         this.$axios.post(apiUrl, this.form,{
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3b2d1ZDE1MTQiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjU3OTQ0MzgyLCJleHAiOjE2NTg0Njk5ODJ9.eOu6Inq6n-BtgiLmJnGg0jX6riyjQHcCf7XObDEH_Y4`
+                Authorization: localStorage.getItem('user_token')
         }})
         .then((res) => {
             console.log(res);

@@ -29,6 +29,12 @@ export default {
     }
   },
   methods: {
+    goToBoards() {
+      this.$router.push({
+        name: 'BoardList'
+      })
+    },
+      
     fnLogin() {
     if (this.username === '') {
         alert('ID를 입력하세요.')
@@ -51,6 +57,10 @@ export default {
             console.log(res.data);
             if(res.data.token !== null){
                 alert("로그인이 완료되었습니다.")
+                console.log(res.data.data.token)
+                localStorage.setItem('user_token', res.data.data.token)
+                // localStorage.setItem('user_role', userInfoResponse.data.user_role)
+                this.goToBoards();
             }
         }).catch((err) => {
             console.log(err);

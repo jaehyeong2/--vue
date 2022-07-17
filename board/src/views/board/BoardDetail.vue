@@ -16,6 +16,18 @@
     <div class="board-contents">
       <span>{{ content }}</span>
     </div>
+
+  <table>
+    <tbody>
+      <tr v-for="(data, idx) in commentList" :key="idx">
+        <td>{{ data.content }}</td>
+        <td>{{ data.username }}</td>
+        <td>{{ data.likeCount }}</td> 
+        <td>{{ data.createDate }}</td>  
+      </tr>
+    </tbody>
+  </table>
+    
   </div>
 </template>
 
@@ -25,30 +37,57 @@ export default {
     return {
       requestBody: this.$route.query,
       idx: this.$route.query.idx,
-
       title: '',
       author: '',
       contents: '',
+      commentList: {},
       created_at: '',
-      boardId: ''
+      boardId: '',
+      commentWriter: '',
+      commentContent: '',
+      commnetLikeCount: '' 
     }
   },
   mounted() {
-    this.fnGetView()
+    this.getBoardDetail(),
+    this.getCommentList()
   },
   methods: {
-    fnGetView() {
+    getBoardDetail() {
       this.$axios.get(this.$serverUrl + '/boards/' +this.idx, {
 
       }).then((res) => {
-          console.log("겟뷰 호출")
         let list = res.data.data;
-        console.log(list);
         this.title = list.title;
         this.userName = list.userName;
         this.content = list.content;
         this.createDate = list.createDate;
         this.boardId = list.boardId;
+        // this.getCommentList();
+      }).catch((err) => {
+        if (err.message.indexOf('Network Error') > -1) {
+          alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
+        }
+      })
+    },
+    getCommentList() {
+      this.$axios.get(this.$serverUrl + '/boards/' +this.idx+"/comments", {
+
+      }).then((res) => {
+        this.commentList = res.data.data.dataList;
+        console.log("댓글 호출")
+        console.log(this.commentList)
+        console.log(commentList[0].username)
+        
+        this.commentList = res.data;
+        console.log(commentList);
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~")
+        // this.commentWriter = commentList.userName;
+        // this.commentContent = commentList.content;
+        // this.commnetLikeCount = commentList.likeCount;
+
+        // console.log(this.commentContent);
+
       }).catch((err) => {
         if (err.message.indexOf('Network Error') > -1) {
           alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
