@@ -9,8 +9,8 @@
       </textarea>
     </div>
     <div class="common-buttons">
-      <button type="button" class="w3-button w3-round w3-blue-gray" v-on:click="fnSave">저장</button>&nbsp;
-      <button type="button" class="w3-button w3-round w3-gray" v-on:click="fnList">목록</button>
+      <button type="button" class="w3-button w3-round w3-blue-gray" v-on:click="fnSave()">저장</button>&nbsp;
+      <button type="button" class="w3-button w3-round w3-gray" v-on:click="fnList()">목록</button>
     </div>
   </div>
 </template>
