@@ -6,21 +6,12 @@ import BoardWrite from '@/views/board/BoardWrite.vue'
 import SignIn from '@/views/auth/SignIn.vue'
 import SignUp from '@/views/auth/SignUp.vue'
 
-// const requireAuth = () => (from, to, next) => {
-//   const token = localStorage.getItem('user_token')
-//   if (token) {
-//     store.state.isLogin = true
-//     return next()
-//   } // isLogin === true면 페이지 이동
-//   next('/login') // isLogin === false면 다시 로그인 화면으로 이동
-// }
-
 const routes = [
-  {
-    path: '/',
-    name: 'PageHome',
-    component: PageHome
-  },
+  // {
+  //   path: '/',
+  //   name: 'PageHome',
+  //   component: PageHome
+  // },
   {
     path: '/login',
     name: 'Login',
@@ -34,6 +25,7 @@ const routes = [
 
   {
     path: '/boards',
+    alias: ['/boards','/'],
     name: 'BoardList',
     component: BoardList
   },
@@ -46,7 +38,6 @@ const routes = [
     path: '/boards/write',
     name: 'BoardWrite',
     component: BoardWrite,
-    // beforeEnter: requireAuth() 
   },
 ]
 

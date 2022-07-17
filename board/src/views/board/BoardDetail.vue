@@ -1,9 +1,9 @@
 <template>
   <div class="board-detail">
     <div class="common-buttons">
-      <button type="button" class="w3-button w3-round w3-blue-gray" v-on:click="goToBoardUpdateForm">수정</button>&nbsp;
-      <button type="button" class="w3-button w3-round w3-red" v-on:click="boardDelete">삭제</button>&nbsp;
-      <button type="button" class="w3-button w3-round w3-gray" v-on:click="goToBoardList">목록</button>
+      <button type="button" class="w3-button w3-round w3-blue-gray" v-on:click="goToBoardUpdateForm()">수정</button>&nbsp;
+      <button type="button" class="w3-button w3-round w3-red" v-on:click="boardDelete()">삭제</button>&nbsp;
+      <button type="button" class="w3-button w3-round w3-gray" v-on:click="goToBoardList()">목록</button>
     </div>
     <div class="board-contents">
       <h3>{{ title }}</h3>
@@ -35,7 +35,7 @@
         <td>{{ data.content }}</td>
         <td>{{ data.likeCount }}</td> 
         <td>{{ data.createDate }}</td>  
-        <button class="badge">삭제</button>
+        <button class="badge" v-on:click="deleteComment(data.commentId)">삭제</button>
       </tr>
     </tbody>
   </table>
@@ -101,9 +101,9 @@ export default {
       this.$axios.get(this.$serverUrl + '/boards/' +this.idx+"/comments", {
 
       }).then((res) => {
+        console.log("@@@@@@@@s")
         this.commentList = res.data.data.dataList;
-        this.commentId = commentList.commentId
-
+        this.commentId = res.data.data.dataList.commentId;
       }).catch((err) => {
         if (err.message.indexOf('Network Error') > -1) {
           alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
@@ -124,7 +124,7 @@ export default {
       })
     },
     boardDelete() {
-      if (!confirm("삭제하시겠습니까?")) return
+      if (!confirm("게시물을 삭제하시겠습니까?")) return
 
       this.$axios.delete(this.$serverUrl + '/boards/' + this.boardId, {},)
     .then((res) => {
@@ -158,19 +158,20 @@ export default {
             alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
           }
         })
-      
-        //UPDATE
-        // this.$axios.put(this.$serverUrl+"/comments/"+this.commentId, this.form)
-        // .then((res) => {
-        //   alert('글이 저장되었습니다.')
-        //   this.fnView(res.data.idx)
-        // }).catch((err) => {
-        //   if (err.message.indexOf('Network Error') > -1) {
-        //     alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
-        //   }
-        // })
-      
-    }
+    },
+
+    deleteComment(commentId) {
+      if (!confirm("댓글을 삭제하시겠습니까?")) return
+
+      this.$axios.delete(this.$serverUrl + '/comments/' + commentId, {},)
+    .then((res) => {
+            alert('삭제되었습니다.')
+            this.$router.go();
+          }).catch((err) => {
+        console.log(err);
+      })
+    },
+    
 
   }
 }
