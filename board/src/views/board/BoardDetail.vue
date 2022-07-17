@@ -113,7 +113,7 @@ export default {
     goToBoardList() {
       delete this.requestBody.idx
       this.$router.push({
-        path: './',
+        path: '/boards',
         query: this.requestBody
       })
     },

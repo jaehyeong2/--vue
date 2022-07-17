@@ -1,17 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import PageHome from '@/views/PageHome.vue'
 import BoardList from '@/views/board/BoardList.vue'
 import BoardDetail from '@/views/board/BoardDetail.vue'
 import BoardWrite from '@/views/board/BoardWrite.vue'
 import SignIn from '@/views/auth/SignIn.vue'
 import SignUp from '@/views/auth/SignUp.vue'
+import MyPage from '@/views/user/MyPage.vue'
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'PageHome',
-  //   component: PageHome
-  // },
   {
     path: '/login',
     name: 'Login',
@@ -38,6 +33,11 @@ const routes = [
     path: '/boards/write',
     name: 'BoardWrite',
     component: BoardWrite,
+  },
+  {
+    path: '/user/mypage',
+    name: 'MyPage',
+    component: MyPage,
   },
 ]
 

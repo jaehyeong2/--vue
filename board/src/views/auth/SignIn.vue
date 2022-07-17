@@ -25,7 +25,8 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      userId: ''
     }
   },
   methods: {
@@ -59,6 +60,7 @@ export default {
                 alert("로그인이 완료되었습니다.")
                 console.log(res.data.data.token)
                 localStorage.setItem('user_token', res.data.data.token)
+                localStorage.setItem('user_id', res.data.data.userId)
                 // localStorage.setItem('user_role', userInfoResponse.data.user_role)
                 this.goToBoards();
             }

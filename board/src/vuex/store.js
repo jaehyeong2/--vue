@@ -1,4 +1,4 @@
-import createStore from "./store"
+import { createStore } from "vuex";
 import getters from "./getters"
 import mutations from "./mutations"
 
@@ -10,4 +10,4 @@ export default createStore({
   mutations,
   getters,
 
-})
+});
