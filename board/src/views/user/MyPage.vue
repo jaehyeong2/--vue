@@ -1,5 +1,8 @@
 <template>
   <div class="board-list">
+    <div class="common-buttons">
+      <button type="button" class="w3-button w3-round w3-blue-gray" v-on:click="withdraw()">회원탈퇴</button>
+    </div>
     <table class="w3-table-all">
       <thead>
       <tr>
@@ -72,6 +75,26 @@ export default {
         if (err.message.indexOf('Network Error') > -1) {
           alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
         }
+      })
+    },
+    withdraw(){
+        if (!confirm("정말로 탈퇴하시겠습니까?")) return
+
+        this.$axios.delete(this.$serverUrl + "/users/"+this.userId, {
+      }).then((res) => {      
+        alert("정상적으로 처리되었습니다");
+        this.goToBoardList();
+      }).catch((err) => {
+        if (err.message.indexOf('Network Error') > -1) {
+          alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
+        }
+      })
+    },
+    goToBoardList() {
+      delete this.requestBody.idx
+      this.$router.push({
+        path: '/boards',
+        query: this.requestBody
       })
     },
   }
